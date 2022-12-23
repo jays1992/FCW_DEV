@@ -1,0 +1,2 @@
+Error:Invalid: Already exist BOM no BOM/000039 check row no 1 
+Error:Invalid: Blank Product Code. check row no 1 

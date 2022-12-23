@@ -1,0 +1,1 @@
+Error:Customer CUST00016- Invalid: GSTIN number 062AACM0829Q1Z8 

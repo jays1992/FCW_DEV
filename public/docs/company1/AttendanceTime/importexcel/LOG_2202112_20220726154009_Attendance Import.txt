@@ -1,0 +1,5 @@
+Error:Invalid: Already exist purchasing document in database. check row no 1 
+Error:Invalid: Already exist purchasing document in database. check row no 2 
+Error:Invalid: Already exist purchasing document in database. check row no 3 
+Error:Invalid: Already exist purchasing document in database. check row no 4 
+Error:Invalid: Already exist purchasing document in database. check row no 5 

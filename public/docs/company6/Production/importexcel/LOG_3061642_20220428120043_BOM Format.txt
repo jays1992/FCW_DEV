@@ -1,0 +1,1 @@
+Error:Invalid: bom no/product code should same. check row no3 

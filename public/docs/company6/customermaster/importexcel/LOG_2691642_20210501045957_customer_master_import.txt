@@ -1,0 +1,1 @@
+Error:Customer CUST00013- Invalid Location Details: Invaid Default Billing value=0. Blank or 1 Allowed. 

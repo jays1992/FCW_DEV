@@ -1,0 +1,1 @@
+Error:Item RM0001- Invalid:Sub Group Code Test SUB GROUP2 NEW TEXT Space not allowed or Only Alpha Numeric allowed 

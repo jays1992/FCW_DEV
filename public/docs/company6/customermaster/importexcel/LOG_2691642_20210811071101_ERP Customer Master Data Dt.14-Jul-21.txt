@@ -1,0 +1,1 @@
+Error:Customer CUST00001- Invalid Statutory Credit Days 30 Days,  Only Digit allowed.  

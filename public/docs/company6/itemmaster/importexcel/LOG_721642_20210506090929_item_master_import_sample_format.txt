@@ -1,0 +1,1 @@
+Error:Item IT0012- Invalid UOM Conversion Details - To UOM is blank. Please enter To UOM data in at least one row. 

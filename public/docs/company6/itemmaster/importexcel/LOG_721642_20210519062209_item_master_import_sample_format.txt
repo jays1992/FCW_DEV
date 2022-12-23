@@ -1,0 +1,4 @@
+Error:Item RM0003- Invalid: UOM Conversion Details - Main UoM and To UOM Code PCS can not be same. 
+Error:Item RM0004- Invalid: UOM Conversion Details - Main UoM and To UOM Code PCS can not be same. 
+Item RM0003: Record successfully inserted. 
+Item RM0004: Record successfully inserted. 

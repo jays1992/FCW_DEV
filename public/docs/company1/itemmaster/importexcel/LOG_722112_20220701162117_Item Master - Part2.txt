@@ -1,0 +1,1 @@
+Error:Item IM00353: Inventory Class Name A Class not found. 

@@ -1,0 +1,2 @@
+Error:Invalid: Already exist BOM no in database. check row no 1 
+Error:Invalid: Blank Consumed Qty. check row no 1 

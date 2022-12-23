@@ -1,0 +1,2 @@
+Vendor VM00001: Record successfully inserted. 
+Vendor VM00002: Record successfully inserted. 

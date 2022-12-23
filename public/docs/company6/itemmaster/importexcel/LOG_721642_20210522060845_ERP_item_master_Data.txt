@@ -1,0 +1,2 @@
+Error:Item IT0001- Invalid: UOM Conversion Details - Main UoM and To UOM Code PCS can not be same. 
+Error:Item IT0001- Invalid :  UDF Data.  

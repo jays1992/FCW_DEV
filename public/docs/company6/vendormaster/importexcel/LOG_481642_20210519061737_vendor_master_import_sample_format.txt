@@ -1,0 +1,2 @@
+Vendor ven001: Record successfully inserted. 
+Vendor ven002: Record successfully inserted. 

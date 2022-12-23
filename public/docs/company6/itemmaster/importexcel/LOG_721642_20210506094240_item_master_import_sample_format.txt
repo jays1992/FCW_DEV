@@ -1,0 +1,4 @@
+Error:Item IT0018- Invalid: UOM Conversion Details - Main UoM and To UOM Code PCS can not be same. 
+Error:Item IT0019- Invalid: UOM Conversion Details - Main UoM and To UOM Code PCS can not be same. 
+Item IT0018: Record successfully inserted. 
+Item IT0019: Record successfully inserted. 

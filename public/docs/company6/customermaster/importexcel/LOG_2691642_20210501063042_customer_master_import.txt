@@ -1,0 +1,3 @@
+Customer CUST00013: Record successfully inserted. 
+Customer CUST00014: Record successfully inserted. 
+Customer CUST00015: Record successfully inserted. 

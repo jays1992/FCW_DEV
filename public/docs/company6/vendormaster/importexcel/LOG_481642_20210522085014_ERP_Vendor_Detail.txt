@@ -1,0 +1,1 @@
+Error:Vendor VM00024- Invalid Bank- Account No 522-0-555162-5,  Only Digit allowed.  

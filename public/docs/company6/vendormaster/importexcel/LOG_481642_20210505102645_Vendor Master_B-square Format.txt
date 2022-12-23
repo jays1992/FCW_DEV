@@ -1,0 +1,1 @@
+Error:Vendor VEND0064- Invalid Bank- Account No 072-815533-001,  Only Digit allowed.  

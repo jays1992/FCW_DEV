@@ -1,0 +1,1 @@
+Error:Customer C00056- Invalid: Registered Address Line 1: C-51 YARD , PLOT NO. 9 ,IDA PARK , APIIC , ROAD NO. 8 , VAKALPUDI , THAMMAVARAM VILLAGE , KAKINADA - 533005 , ANDHRA PRADESH can have max 100 character. 

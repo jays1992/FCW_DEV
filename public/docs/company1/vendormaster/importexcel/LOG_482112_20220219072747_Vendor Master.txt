@@ -1,0 +1,1 @@
+Error:Vendor V00123- Invalid Location Details: Country Name-. Please insert the value for State Name or City Name. 

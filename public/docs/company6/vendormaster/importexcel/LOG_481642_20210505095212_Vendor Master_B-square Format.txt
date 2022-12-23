@@ -1,0 +1,1 @@
+Error:Vendor VEND0001- Invalid Bank- Account No 531-0-502439-7,  Only Digit allowed.  

@@ -1,0 +1,3 @@
+Error:Customer CUST00012 - DATE - UDF Label not found.  
+Error:Customer CUST00012 - TIME - UDF Label not found.  
+Error:Customer CUST00012 - CUSTOEMR TYPE - UDF Label not found.  

@@ -1,0 +1,1 @@
+Error:Item FG0030- Invalid: Material Type FG-FINISH GOOD. Allow values are FG-Finish Good/SFG- Semi Finish Good/RM-Raw Material/PM-Packing Material/O-Other  

@@ -1,0 +1,1 @@
+Error:Invalid: Already exist purchasing document in database. check row no 1 

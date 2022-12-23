@@ -1,0 +1,19 @@
+.nav a, .nav label {display: block;padding: 1px 0 1px 25px;color: #0f69cc;-webkit-transition: all .25s ease-in;transition: all .25s ease-in;}
+.nav a:focus, .nav a:hover, .nav label:focus, .nav label:hover {color:#0f69cc}
+.nav label { cursor: pointer; }
+.group-list a, .group-list label {padding-left: 2rem;}
+.group-list a:focus, .group-list a:hover, .group-list label:focus, .group-list label:hover { background:transparent; }
+.sub-group-list a, .sub-group-list label {}
+.sub-group-list a:focus, .sub-group-list a:hover, .sub-group-list label:focus, .sub-group-list label:hover { background: transparent; }
+.sub-sub-group-list a, .sub-sub-group-list label {padding-left: 6rem;}
+.sub-sub-group-list a:focus, .sub-sub-group-list a:hover, .sub-sub-group-list label:focus, .sub-sub-group-list label:hover { background: transparent; }
+.group-list, .sub-group-list, .sub-sub-group-list {max-height: 0;overflow: hidden;-webkit-transition: max-height .5s ease-in-out;
+transition: max-height .5s ease-in-out;}
+.nav__list input[type=checkbox]:checked + label + ul {max-height: 1000px;background: #68a9f0;margin-left: 20px;}
+.group-list a{color:#fff; text-decoration:none}
+.group-list a:hover{color:#fff}
+.group-list label{color:#fff; text-decoration:none;background: #2d90fd}
+.group-list label:hover{color:#fff;}
+label > span {float: left;-webkit-transition: -webkit-transform .65s ease;transition: transform .65s ease;padding: 2px 5px 0 0;}
+.nav__list .fa{font-size:1.1em}
+.nav__list input[type=checkbox]:checked + label > span {-webkit-transform: rotate(90deg);-ms-transform: rotate(90deg);transform: rotate(90deg); padding: 2px 5px 0 0;}

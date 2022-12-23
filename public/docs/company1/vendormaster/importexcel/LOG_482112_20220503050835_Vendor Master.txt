@@ -1,0 +1,1 @@
+Error:Vendor VED0000228- Invalid Statutory Credit Limit =LEN(AE2),  Only Number allowed.  

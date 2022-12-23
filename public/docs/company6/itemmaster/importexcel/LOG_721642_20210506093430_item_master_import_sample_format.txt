@@ -1,0 +1,4 @@
+Error:Item IT0014- Invalid: UOM Conversion Details - Main UoM and To UOM Code NOS can not be same. 
+Error:Item IT0015- Invalid: UOM Conversion Details - Main UoM and To UOM Code NOS can not be same. 
+Item IT0014: Record successfully inserted. 
+Item IT0015: Record successfully inserted. 

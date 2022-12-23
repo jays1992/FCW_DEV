@@ -1,0 +1,1 @@
+Error: Customer CUST00013: Record not inserted. Violation of UNIQUE KEY constraint 'UQ_CUSTOMER_UDF'. Cannot insert duplicate key in object 'dbo.TBL_MST_CUSTOMER_UDF'. The duplicate key value is (28, 1). 

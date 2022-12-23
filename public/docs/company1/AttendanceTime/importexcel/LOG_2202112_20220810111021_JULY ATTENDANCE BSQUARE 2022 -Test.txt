@@ -1,0 +1,2 @@
+ Purchasing Document 3: Record successfully inserted. 
+ Purchasing Document 4: Record successfully inserted. 

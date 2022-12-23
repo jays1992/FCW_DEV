@@ -1,0 +1,4 @@
+Customer CUST00001: Record successfully inserted. 
+Customer CUST00049: Record successfully inserted. 
+Customer CUST00002: Record successfully inserted. 
+Customer CUST00003: Record successfully inserted. 

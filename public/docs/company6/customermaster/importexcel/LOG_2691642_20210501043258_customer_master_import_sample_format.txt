@@ -1,0 +1,1 @@
+Error:Customer CUST00012: Statutory Assessee Type Code NOA0001 not found. 

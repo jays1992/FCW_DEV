@@ -1,0 +1,1 @@
+Error:Invalid Customer CUST00013: Blank UDF value. 

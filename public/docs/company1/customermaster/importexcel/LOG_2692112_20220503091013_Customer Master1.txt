@@ -1,0 +1,1 @@
+Error:Customer C00053: Statutory GST Type Name Registered not found. 

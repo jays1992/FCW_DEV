@@ -1,0 +1,1 @@
+Error:Vendor VEND0018- Invalid Bank- Account No DRLALPC004283026,  Only Digit allowed.  

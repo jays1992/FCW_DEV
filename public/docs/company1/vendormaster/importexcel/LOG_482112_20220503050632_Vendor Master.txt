@@ -1,0 +1,1 @@
+Error:Vendor VED0000228: Statutory GST Type Name Registered not found. 

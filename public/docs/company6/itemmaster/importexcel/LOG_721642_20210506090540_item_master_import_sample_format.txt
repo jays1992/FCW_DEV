@@ -1,0 +1,3 @@
+Error:Item IT0012- Invalid: UOM Conversion Details - Main UoM and To UOM Code pcs can not be same. 
+Error:Item IT0013- Invalid: UOM Conversion Details - Main UoM and To UOM Code pcs can not be same. 
+Error:Item IT0013- Invalid :  UDF Data.  

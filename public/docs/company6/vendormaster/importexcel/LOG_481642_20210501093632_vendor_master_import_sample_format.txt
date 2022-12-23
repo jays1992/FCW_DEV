@@ -1,0 +1,1 @@
+Error:Vendor ven03: Statutory Assessee Type Code NOA0001 not found. 

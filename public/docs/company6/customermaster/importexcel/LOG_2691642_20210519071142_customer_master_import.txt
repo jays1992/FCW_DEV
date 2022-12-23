@@ -1,0 +1,1 @@
+Customer CUST00025: Record successfully inserted. 

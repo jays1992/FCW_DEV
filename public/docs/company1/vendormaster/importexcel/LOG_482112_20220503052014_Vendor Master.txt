@@ -1,0 +1,1 @@
+Error:Vendor VED0000240- Invalid: Statutory PAN number: ANKPS8469G1 can have max 10 character. 

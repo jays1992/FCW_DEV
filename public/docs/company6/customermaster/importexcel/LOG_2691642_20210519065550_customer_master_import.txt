@@ -1,0 +1,1 @@
+Error:Customer CUST00025- Invalid General Ledger Code Sundry Debtor,  Space not allowed or Only Alpha Numeric allowed.  

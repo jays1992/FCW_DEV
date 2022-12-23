@@ -1,0 +1,1 @@
+Error:Vendor VED0000275- Invalid Location Details:Location name is blank. Please enter location data for at least  one row. 

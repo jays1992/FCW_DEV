@@ -1,0 +1,1 @@
+Error:Invalid Customer C00082: Blank Registered Pincode 

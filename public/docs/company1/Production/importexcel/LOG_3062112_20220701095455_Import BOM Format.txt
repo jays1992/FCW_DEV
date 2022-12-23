@@ -1,0 +1,2 @@
+Error:Invalid: Already exist BOM no BOM0011 check row no 1 
+Error:Invalid: Already exist BOM no BOM0011 check row no 2 

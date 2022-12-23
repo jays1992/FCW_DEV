@@ -1,0 +1,14 @@
+Vendor VED0000008: Record successfully inserted. 
+Vendor VED0000009: Record successfully inserted. 
+Vendor VED0000010: Record successfully inserted. 
+Vendor VED0000011: Record successfully inserted. 
+Vendor VED0000012: Record successfully inserted. 
+Vendor VED0000013: Record successfully inserted. 
+Vendor VED0000014: Record successfully inserted. 
+Vendor VED0000015: Record successfully inserted. 
+Vendor VED0000016: Record successfully inserted. 
+Vendor VED0000017: Record successfully inserted. 
+Vendor VED0000018: Record successfully inserted. 
+Vendor VED0000019: Record successfully inserted. 
+Vendor VED0000020: Record successfully inserted. 
+Vendor VED0000021: Record successfully inserted. 

@@ -1,0 +1,1 @@
+Error:Vendor VM00027- Invalid Bank- Account No '08822320000217,  Only Digit allowed.  

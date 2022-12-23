@@ -1,0 +1,1 @@
+Error:Invalid Vendor VM00001: Duplicate Vendor Code VM00001 

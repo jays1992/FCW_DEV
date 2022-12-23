@@ -1,0 +1,1 @@
+Error:Invalid Customer CUST00016: Blank Statutory GST Type Code 

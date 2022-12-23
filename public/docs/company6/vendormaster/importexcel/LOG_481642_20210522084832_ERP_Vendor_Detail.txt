@@ -1,0 +1,1 @@
+Error:Vendor VM00016- Invalid Bank- Account No '009342,  Only Digit allowed.  

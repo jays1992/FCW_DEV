@@ -1,0 +1,53 @@
+
+item_master_query
+
+Add. Customer Code
+Add. Customer Name
+Add. Part Number
+Add. Part Description
+Add. Customer Part No.
+Add. Market & Set Code
+Rounding Value/LOT Size Qty
+Add. Info Part No.
+Add. Info Customer Part No
+Add. Info OEM Part No.
+
+
+INSERT INTO TBL_MST_ADDL_TAB_SETTING (CYID_REF,TABLE_NAME,TAB_NAME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,FIELD6,FIELD7,FIELD8,FIELD9,FIELD10)
+VALUES (36,'ITEM_TAB_SETTING','ALPS Specific','SAP Customer Code','SAP Customer Name','SAP Part Number','SAP Part Description','SAP Customer Part No',
+'SAP Market & Set Code','Rounding Value/LOT Size Qty','ALPS Part No','Customer Part No','OEM Part No');
+
+vendor_master_query
+
+SAP Vendor Code
+SAP Vendor Name1
+SAP Vendor Name2
+SAP Vendor Name3
+SAP Corporate Group
+SAP Account Group
+SAP Account Group Name
+SAP Trading Partner
+SAP Trading Partner Name
+SAP Invoicing Party
+Our Code In Vendor Book
+
+INSERT INTO TBL_MST_ADDL_TAB_SETTING (CYID_REF,TABLE_NAME,TAB_NAME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,FIELD6,FIELD7,FIELD8,FIELD9,FIELD10,FIELD11)
+VALUES (6,'VENDOR_TAB_SETTING','ALPS Specific','SAP Vendor Code','SAP Vendor Name1','SAP Vendor Name2','SAP Vendor Name3','SAP Corporate Group','SAP Account Group','SAP Account Group Name','SAP Trading Partner','SAP Trading Partner Name','SAP Invoicing Party','Our Code In Vendor Book');
+
+customer_master_query
+
+SAP Customer Code
+SAP Customer Name
+SAP Account Group
+SAP Customer Group Code
+SAP Customer Group Name
+SAP Global Group Account Code
+SAP Global Group Account Name
+Our Code in Customer book
+
+INSERT INTO TBL_MST_ADDL_TAB_SETTING (CYID_REF,TABLE_NAME,TAB_NAME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,FIELD6,FIELD7,FIELD8)
+VALUES (6,'CUSTOMER_TAB_SETTING','ALPS Specific','SAP Customer Code','SAP Customer Name','SAP Account Group','SAP Customer Group Code','SAP Customer Group Name','SAP Global Group Account Code','SAP Global Group Account Name','Our Code in Customer book');
+
+
+
+

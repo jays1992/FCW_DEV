@@ -1,0 +1,1 @@
+Error:Vendor VM00015- Invalid Bank- Account No '092805000621,  Only Digit allowed.  

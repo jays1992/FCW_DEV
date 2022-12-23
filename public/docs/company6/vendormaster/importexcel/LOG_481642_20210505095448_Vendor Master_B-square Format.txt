@@ -1,0 +1,1 @@
+Error:Vendor VEND0001- Invalid Location Details: Emailaditya.kumar@ahujaresidency.com can have max 30 character. 

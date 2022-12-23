@@ -1,0 +1,1 @@
+Error:Vendor VM00001- Invalid: Bank- Account Type value(Current). Only Allowed  SAVING ACCOUNT or CURRENT ACCOUNT or OD or OTHERS 

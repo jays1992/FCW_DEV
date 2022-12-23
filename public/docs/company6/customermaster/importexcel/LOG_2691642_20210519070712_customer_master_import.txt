@@ -1,0 +1,1 @@
+Error:Customer CUST00025: Statutory Industry Typ Name IND01 not found. 

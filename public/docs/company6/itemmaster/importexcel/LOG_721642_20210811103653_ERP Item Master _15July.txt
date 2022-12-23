@@ -1,0 +1,1 @@
+Error:Invalid Item FG0030: Blank Inventory Class Name 

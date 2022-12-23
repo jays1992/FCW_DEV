@@ -1,0 +1,20 @@
+Error:Invalid: pay_period is not exist in database. check row no 1 
+Error:Invalid: Material/Customer material number is not exist in database. check row no 1 
+Error:Invalid: Material/Attendance Status is not exist in database. check row no 1 
+Error:Invalid: Material/SHIFT material number is not exist in database. check row no 1 
+Error:Invalid: pay_period is not exist in database. check row no 2 
+Error:Invalid: Material/Customer material number is not exist in database. check row no 2 
+Error:Invalid: Material/Attendance Status is not exist in database. check row no 2 
+Error:Invalid: Material/SHIFT material number is not exist in database. check row no 2 
+Error:Invalid: pay_period is not exist in database. check row no 3 
+Error:Invalid: Material/Customer material number is not exist in database. check row no 3 
+Error:Invalid: Material/Attendance Status is not exist in database. check row no 3 
+Error:Invalid: Material/SHIFT material number is not exist in database. check row no 3 
+Error:Invalid: pay_period is not exist in database. check row no 4 
+Error:Invalid: Material/Customer material number is not exist in database. check row no 4 
+Error:Invalid: Material/Attendance Status is not exist in database. check row no 4 
+Error:Invalid: Material/SHIFT material number is not exist in database. check row no 4 
+Error:Invalid: pay_period is not exist in database. check row no 5 
+Error:Invalid: Material/Customer material number is not exist in database. check row no 5 
+Error:Invalid: Material/Attendance Status is not exist in database. check row no 5 
+Error:Invalid: Material/SHIFT material number is not exist in database. check row no 5 

@@ -1,0 +1,12 @@
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 1 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 2 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 3 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 4 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 5 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 6 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 7 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 8 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 9 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 10 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 11 
+Error:Invalid: Already exist Doc no BSIN0022223 check row no 12 

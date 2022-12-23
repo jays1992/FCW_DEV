@@ -1,0 +1,2 @@
+Error:Invalid Row or Blank Customer Code in Row no 54
+Error:Invalid Customer CUST00001: Blank General Ledger Code 

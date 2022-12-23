@@ -1,0 +1,1 @@
+Error:Vendor VM00014- Invalid: Bank- IFSC BARB0 MANESA.(Fifth character is zero) can have max 20 character. 

@@ -1,0 +1,1 @@
+Error:Item IT0005- Invalid: Main UoM and ALT UoM Code NOS can not be same. 

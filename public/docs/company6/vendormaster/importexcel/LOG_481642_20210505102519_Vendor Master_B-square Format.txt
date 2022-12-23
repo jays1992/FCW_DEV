@@ -1,0 +1,1 @@
+Error:Invalid Vendor VEND0051: Blank Registered Address Line 1 

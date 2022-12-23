@@ -1,0 +1,1 @@
+Error:Vendor VEND0016- Invalid Bank- Account No 0606251001.,  Only Digit allowed.  

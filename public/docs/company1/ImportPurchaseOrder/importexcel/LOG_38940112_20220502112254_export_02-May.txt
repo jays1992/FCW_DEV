@@ -1,0 +1,6 @@
+Error:Invalid: Blank purchasing cocument. check row no 3 
+Error:Invalid: Blank purchasing cocument. check row no 4 
+Error:Invalid: Blank purchasing cocument. check row no 5 
+Error:Invalid: Material/Customer material number is not exist in database. check row no 14 
+Error:Invalid: Material/Customer material number is not exist in database. check row no 15 
+Error:Invalid: Material/Customer material number is not exist in database. check row no 18 

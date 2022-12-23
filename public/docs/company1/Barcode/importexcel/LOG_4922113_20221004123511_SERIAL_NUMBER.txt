@@ -1,0 +1,1 @@
+Error: bom BSIN0022223: Record not inserted. Cannot insert duplicate key row in object 'dbo.TBL_TRN_BARCODE_MAT' with unique index 'NON_BARCODE_MAT_IDX'. The duplicate key value is (22, 2497, 14). 
