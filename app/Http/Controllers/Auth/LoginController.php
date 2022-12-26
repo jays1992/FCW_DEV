@@ -143,7 +143,7 @@ class LoginController extends Controller
                     $data_arr   =   DB::select("select TOP 1 INDATE as LastDate FROM TBL_MST_AUDITTRAIL
                     where USERID='$UID' AND CYID_REF='$CID' /*AND BRID_REF=' $BID' AND FYID_REF='$FID'*/ order by ACTID DESC");
             
-                    $branch_arr =   DB::select("select t2.NAME as company_name,t3.BRID as branch_id,t3.BRNAME as branch_name,t3.LOGO as branch_logo,t4.BG_DESC as branch_group 
+                    $branch_arr =   DB::select("select t2.NAME as company_name,t3.BRID as branch_id,t3.BRNAME as branch_name,t3.LOGO as branch_logo,t3.FRANCHISEE_LABEL as franchisee_label,t4.BG_DESC as branch_group 
                     from TBL_MST_USER_BRANCH_MAP t1 
                     inner join TBL_MST_COMPANY t2 on t1.CYID_REF=t2.CYID 
                     inner join TBL_MST_BRANCH t3 on t1.MAPBRID_REF=t3.BRID 
@@ -156,7 +156,11 @@ class LoginController extends Controller
                     $branch_name   =   $branch_arr[0]->branch_name;
                     $branch_group   =   $branch_arr[0]->branch_group;
                     $branch_logo   =   $branch_arr[0]->branch_logo;
+                    $franchisee_label=   $branch_arr[0]->franchisee_label;
                     $BID            =   $branch_arr[0]->branch_id;
+                    
+
+                    
 
                     
             
@@ -166,6 +170,7 @@ class LoginController extends Controller
                     Session::put('branch_name', $branch_name);
                     Session::put('branch_group', $branch_group);
                     Session::put('branch_logo', $branch_logo);
+                    Session::put('franchisee_label', $franchisee_label);
                     
                     Session::put('BRID_REF', $BID);
                     Session::put('FYID_REF', $FID);

@@ -1,7 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;500;600&display=swap');
 
-*{margin:0px; padding:0px;}
+*{margin:0px; padding:0px;font-family: 'Exo 2', sans-serif;}
 .page{width:100%; float:left;display: flex;flex-direction: column;min-height: 100vh;}
 .app-sidebar {position: fixed;top: 0;bottom: 0;left: 0;color: #14112d;width: 240px;max-height: 100%;z-index: 1024;/*background: url(../img/bg.jpg) repeat ;*/background: #0f0f0f;    background-size: cover;border-right: 1px solid #e3e3e3;
   /* webkit-transition: left 0.3s ease, width 0.3s ease;  */
@@ -100,7 +101,7 @@
 .menuleft{width:100%; float:left; margin-top:64px;/*background: url(../img/bg.jpg) repeat;*/background: #0f0f0f;background-size: cover;}
 .menuleft ul{padding:0px;}
 .menuleft ul li{list-style:none;display:block;}
-.menuleft ul li a{color:#fff; font-size:13px; font-weight:400; padding:15px 15px; display:block; text-decoration:none;position:relative;}
+.menuleft ul li a{color:#fff; font-size:15px; font-weight:400; padding:15px 15px; display:block; text-decoration:none;position:relative;}
 /*.menuleft ul li a:before {
     content: "";
     position: absolute;
@@ -252,7 +253,7 @@ vertical-menu li ul li a:before, #vertical-menu li ul li a.active:before  {conte
 }
 .form-container .form-horizontal .remember-me .check-label{
     color: #999;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     vertical-align: top;
     display: inline-block;
@@ -290,7 +291,7 @@ vertical-menu li ul li a:before, #vertical-menu li ul li a.active:before  {conte
 .form-container .form-horizontal .remember-me .checkbox:focus{ outline: none; }
 .form-container .form-horizontal .forgot{
     color: #999;
-    font-size: 12px;
+    font-size: 14px;
     text-align: right;
     width: 100px;
     vertical-align: top;
@@ -318,7 +319,7 @@ vertical-menu li ul li a:before, #vertical-menu li ul li a.active:before  {conte
 .form-container .right-content .social-links li a{
     color: #fff;
     background-color: #F16262;
-    font-size: 12px;
+    font-size: 14px;
     padding: 9px 12px;
     border-radius: 5px;
     display: block;
@@ -329,7 +330,7 @@ vertical-menu li ul li a:before, #vertical-menu li ul li a.active:before  {conte
 .form-container .right-content .social-links li a:hover{ box-shadow: 0 0 5px rgba(0,0,0,0.5); }
 .form-container .right-content .signup-link{
     color: #999;
-    font-size: 13px;
+    font-size: 14px;
 }
 .form-container .right-content .signup-link a{
     color: #F16262;
@@ -445,7 +446,7 @@ form select {margin: 0px;width: 150px;padding: 5px 35px 5px 5px;font-size: 16px;
     padding: 7px 15;
     font-weight: 500;
     border-radius: 3px;
-    font-size: 11px;
+    font-size: 14px;
     float: left;
     /* margin-left: 15px; */
     margin-left: 25px;
@@ -454,7 +455,7 @@ form select {margin: 0px;width: 150px;padding: 5px 35px 5px 5px;font-size: 16px;
 }
 .topnavbt:hover{color:#fff; background:#0b1821;}
 .topnav-pd{padding-left:0 !important; padding-right: 0!important}
-.singlebt{text-align:center;padding:7px 15px;border-radius:0px;font-weight:600;background:transparent;color:#999;font-size:12px;border:1px solid#ccc;border-radius:0px;width: 100%;}
+.singlebt{text-align:center;padding:7px 15px;border-radius:0px;font-weight:600;background:transparent;color:#999;font-size:14px;border:1px solid#ccc;border-radius:0px;width: 100%;}
 .singlebt:hover{color:#fff; background:#0b1821;}
 .topnav .form-control{height:32px; border-radius:0;font-size:12px}
 .filter{margin-top:0px}
@@ -463,13 +464,13 @@ form select {margin: 0px;width: 150px;padding: 5px 35px 5px 5px;font-size: 16px;
     padding: 5px;
     
     background: url(../img/bg.jpg) repeat;
-    font-size: 11px;
+    font-size: 14px;
    /* border: 1px solid#b7b7b7;*/
     color: #000000;
     font-weight: 600;
 }
 
-.filter .form-control{height:26px; border-radius:0; float:left;font-size: 12px; padding:2px}
+.filter .form-control{height:26px; border-radius:0; float:left;font-size: 14px; padding:2px}
 .filter input{float:left}
 .filter #checkbox{float:right}
 .filter input[type="date"].form-control{line-height:17px}
@@ -537,7 +538,7 @@ color: #0f69cc !important;}
 .multiple .dropdown ul {margin: -1px 0 0 0;}
 .multiple .dropdown dd {position: relative;}
 .multiple .dropdown a,
-.multiple .dropdown a:visited {color: #fff;text-decoration: none;outline: none;font-size: 12px;}
+.multiple .dropdown a:visited {color: #fff;text-decoration: none;outline: none;font-size: 14px;}
 .multiple .dropdown dt a {display: block;overflow: hidden;border: 0;}
 .multiple .dropdown dt a span,
 .multiSel span {cursor: pointer; display: inline-block; padding: 0 3px 2px 0;color:#0f69cc;}
@@ -558,7 +559,7 @@ color: #0f69cc !important;}
 .single .dropdown ul {margin: -1px 0 0 0;}
 .single .dropdown dd {position: relative;}
 .single .dropdown a,
-.single .dropdown a:visited {color: #fff;text-decoration: none;outline: none;font-size: 12px;}
+.single .dropdown a:visited {color: #fff;text-decoration: none;outline: none;font-size: 14px;}
 .single .dropdown dt a {display: block;overflow: hidden;border: 0;}
 .single .dropdown dt a span,
 .multiSel span {cursor: pointer; display: inline-block; padding: 0 3px 2px 0;color:#0f69cc}
@@ -726,7 +727,7 @@ table.dataTable.nowrap th {color: #0f69cc;}
 .table>thead>tr>th {
     vertical-align: bottom;
     border-bottom: 2px solid #ddd;
-    font-size: 13px;
+    font-size: 14px;
     color: #000 !important;
     font-weight: 400;
     padding: 5px;
@@ -740,7 +741,7 @@ table.dataTable.nowrap th {color: #0f69cc;}
     border-radius: 3px;
 }
 table.table-bordered.dataTable td {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
 }
 
@@ -749,6 +750,7 @@ table.table-bordered.dataTable td {
 }
 ul.nav.nav-tabs li a {
     color: #000;
+    font-size: 15px;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: #555;
@@ -775,7 +777,7 @@ ul.nav.nav-tabs li a {
 }
 .table-bordered.itemlist tr th {
     padding: 5px 5px;
-    font-size: 13px;
+    font-size: 14px;
     border: 1px solid#7f7f7f !important;
     color: #0f69cc;
     background: #dedad7;
@@ -908,7 +910,10 @@ body {
 }
 a:hover{text-decoration: none !important;}
 .bgdesignsn{/* background:url(../img/body-bg.jpg) no-repeat; */ width:100%;float: left;position: relative;width: 100%;margin:10px;padding: 30px;}
-.pgmncntainr p{text-align: center;}
+.pgmncntainr p {
+    text-align: center;
+    margin-top: 5px;
+}
 .page{min-height:auto;}
 
 .innerdesd .text-primary{text-align: center;}
@@ -931,7 +936,7 @@ a:hover{text-decoration: none !important;}
 }
 #vertical-menu li ul li a {
     padding: 10px 0 10px 33px;
-    font-size: 11px;
+    font-size: 14px;
     border-bottom: 1px solid #3c3939;
 }
 .menuright li .dropdown-item{color: #fff;}

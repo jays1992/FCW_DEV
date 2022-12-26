@@ -320,7 +320,10 @@ $(function () {
 			
 					<div class="col-sm-11">
 						<ul class="menuright">
-							<li><b>Welcome :</b> {{ Auth::user()->DESCRIPTIONS }}</li>
+							<li><b>Welcome :</b> {{ Auth::user()->DESCRIPTIONS }} <span style="color:#000;">@if(Session::get('franchisee_label')) ({{Session::get('franchisee_label')}}) @endif</span></li>
+
+							
+							
 							<!-- <li>,</li> -->
 							<!--<li><b>Company:</b> @if(Session::get('company_name')) {{Session::get('company_name')}} @endif</li>-->
 							<!-- <li>,</li> -->
