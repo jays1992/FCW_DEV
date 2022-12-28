@@ -233,7 +233,7 @@
 
           <div id="Tax" class="tab-pane fade in active">
             <div class="table-responsive table-wrapper-scroll-y" style="height:280px;margin-top:10px;">
-              <table class="display nowrap table table-striped table-bordered itemlist w-200" style="height:auto !important;width:50%">
+              <table class="display nowrap table table-striped table-bordered itemlist w-200" style="height:auto !important;width:60%">
                 <thead>
                   <tr>
                     <th>Tax Description</th>

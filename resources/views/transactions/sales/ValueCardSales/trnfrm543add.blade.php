@@ -226,7 +226,7 @@
 
           <div id="Tax" class="tab-pane fade in active">
             <div class="table-responsive table-wrapper-scroll-y" style="height:280px;margin-top:10px;">
-              <table class="display nowrap table table-striped table-bordered itemlist w-200" style="height:auto !important;width:50%">
+              <table class="display nowrap table table-striped table-bordered itemlist w-200" style="height:auto !important;width:60%">
                 <thead>
                   <tr>
                     <th>Tax Description</th>
@@ -1874,16 +1874,16 @@ function resetTab(){
 
   $('#Tax').find('.taxRow').each(function(){
     var rowcount = $(this).closest('table').find('.taxRow').length;
-    $(this).find('[id*="TAX_PER"]').val('');
-    $(this).find('[id*="TAX_AMOUNT"]').val('');
+    $(this).find('[id*="TAX_PER"]').val('0');
+    $(this).find('[id*="TAX_AMOUNT"]').val('0');
    // $(this).find('input:hidden').val('');
 
 
-    if(rowcount > 1){
-      $(this).closest('.taxRow').remove();
-      rowcount = parseInt(rowcount) - 1;
-      
-    }
+    // if(rowcount > 1){
+    //   $(this).closest('.taxRow').remove();
+    //   rowcount = parseInt(rowcount) - 1;
+    // }
+
   });
 
   $('#TOTAL_TAX_AMOUNT').val('');
