@@ -45,6 +45,22 @@
       </div>
 
       <div class="row">
+                            <div class="col-lg-2 pl"><p>Foreign Currency</p></div>
+                            <div class="col-lg-1 pl">
+                                <input type="checkbox" name="FC" id="FC" class="form-checkbox" >
+                            </div>                            
+                            <div class="col-lg-2 pl col-md-offset-1"><p>Currency</p></div>
+                            <div class="col-lg-2 pl" id="divcurrency" >
+                                <input type="text" name="CRID_popup" id="txtCRID_popup" class="form-control"  autocomplete="off"  disabled/>
+                                <input type="hidden" name="CRID_REF" id="CRID_REF" class="form-control" autocomplete="off" />                                
+                            </div>                            
+                            <div class="col-lg-2 pl"><p>Conversion Factor</p></div>
+                            <div class="col-lg-2 pl">
+                                <input type="text" name="CONVFACT" id="CONVFACT" autocomplete="off" onkeyup="MultiCurrency_Conversion('TOTAL_NET_AMOUNT')" class="form-control" readonly  maxlength="100" />
+                            </div>
+                        </div>   
+
+      <div class="row">
 
         <div class="col-lg-2 pl"><p>Job Card Date</p></div>
         <div class="col-lg-2 pl">
@@ -109,6 +125,20 @@
           <input type="text" name="TOTAL_NET_AMOUNT" id="TOTAL_NET_AMOUNT" class="form-control" autocomplete="off" readonly >
         </div>
       </div>
+
+      <div class="row">
+      <div id="multi_currency_section" style="display:none">
+        <div class="col-lg-8 pl"></div>
+        <div class="col-lg-2 pl"><p id="currency_section"></p></div>
+        <div class="col-lg-2 pl"> 
+          <input type="text" name="TotalValue_Conversion" id="TotalValue_Conversion" class="form-control" autocomplete="off" readonly >
+        </div>
+      </div>
+      </div>
+
+
+
+
 
       <div class="row">
         <div class="col-lg-8 pl"></div>
@@ -327,6 +357,61 @@
     </div>
   </div>
 </div>
+
+
+<!-- Currency Dropdown -->
+<div id="cridpopup" class="modal" role="dialog"  data-backdrop="static">
+<div class="modal-dialog modal-md column3_modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" id='crid_closePopup' >&times;</button>
+      </div>
+    <div class="modal-body">
+	  <div class="tablename"><p>Currency</p></div>
+	  <div class="single single-select table-responsive  table-wrapper-scroll-y my-custom-scrollbar">
+    <table id="CurrencyTable" class="display nowrap table  table-striped table-bordered" width="100%">
+    <thead>
+    <tr>
+      <th class="ROW1">Select</th> 
+      <th class="ROW2">Code</th>
+      <th class="ROW3">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="ROW1"><span class="check_th">&#10004;</span></th>
+        <td class="ROW2"><input type="text" id="currencycodesearch" class="form-control" onkeyup="CurrencyCodeFunction()"></td>
+        <td class="ROW3"><input type="text" id="currencynamesearch" class="form-control" onkeyup="CurrencyNameFunction()"></td>
+      </tr>
+    </tbody>
+    </table>
+      <table id="CurrencyTable2" class="display nowrap table  table-striped table-bordered" width="100%">
+        <thead id="thead2">
+          <!-- <tr>
+            <th>GLCode</th>
+            <th>GLName</th>
+          </tr> -->
+          
+        </thead>
+        <tbody>
+        @foreach ($objothcurrency as $crindex=>$crRow)
+        <tr>
+          <td class="ROW1"> <input type="checkbox" name="SELECT_CRID[]" id="cridcode_{{ $crindex }}" class="clscrid" value="{{ $crRow-> CRID }}" ></td>
+          <td class="ROW2">{{ $crRow-> CRCODE }}
+            <input type="hidden" id="txtcridcode_{{ $crindex }}" data-desc="{{ $crRow-> CRCODE }}" data-desc2="{{ $crRow-> CRDESCRIPTION }}"  value="{{ $crRow-> CRID }}"/>
+          </td>
+          <td class="ROW3">{{ $crRow-> CRDESCRIPTION }}</td>
+        </tr>
+        @endforeach
+        </tbody>
+      </table>
+    </div>
+		<div class="cl"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Currency Dropdown-->  
 
 <div id="modal" class="modal" role="dialog"  data-backdrop="static">
   <div class="modal-dialog modal-md" style="width:50%;" >
@@ -1225,6 +1310,7 @@ function get_total_amount(TEXTNAME,TEXTID){
   var afterDiscount   = (packageAmount-discountAmount);
   var totalAmount     = (afterDiscount+taxAmount);
   $("#TOTAL_NET_AMOUNT").val(parseFloat(totalAmount).toFixed(2));
+  MultiCurrency_Conversion('TOTAL_NET_AMOUNT'); 
 }
 
 function getTaxAmount(textid,value){
@@ -1435,5 +1521,139 @@ function resetTab(){
   $('#TOTAL_PAID_AMOUNT').val('');
   get_total_amount('PAID_AMT','TOTAL_PAID_AMOUNT');
 }
+
+
+		
+	 //Currency Dropdown
+   let crtid = "#CurrencyTable2";
+      let crtid2 = "#CurrencyTable";
+      let currencyheaders = document.querySelectorAll(crtid2 + " th");
+
+      // Sort the table element when clicking on the table headers
+      currencyheaders.forEach(function(element, i) {
+        element.addEventListener("click", function() {
+          w3.sortHTML(crtid, ".clscrid", "td:nth-child(" + (i + 1) + ")");
+        });
+      });
+
+      function CurrencyCodeFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("currencycodesearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("CurrencyTable2");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }       
+        }
+      }
+
+  function CurrencyNameFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("currencynamesearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("CurrencyTable2");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[2];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }       
+    }
+  }
+
+  $('#txtCRID_popup').click(function(event){
+    showSelectedCheck($("#CRID_REF").val(),"SELECT_CRID");
+         $("#cridpopup").show();
+      });
+
+      $("#crid_closePopup").click(function(event){
+        $("#cridpopup").hide();
+      });
+
+      $(".clscrid").click(function(){
+        var fieldid = $(this).attr('id');
+        var txtval =    $("#txt"+fieldid+"").val();
+        var texdesc =   $("#txt"+fieldid+"").data("desc")+'-'+$("#txt"+fieldid+"").data("desc2");      
+        
+        $('#txtCRID_popup').val(texdesc);    
+        $('#CRID_REF').val(txtval);
+        $("#cridpopup").hide();
+        $('#CONVFACT').val(GetConvFector(txtval));
+        $("#currencycodesearch").val(''); 
+        $("#currencynamesearch").val(''); 
+        MultiCurrency_Conversion('TOTAL_NET_AMOUNT'); 
+        event.preventDefault();
+      });
+
+      
+
+  //Currency Dropdown Ends		
+
+  	
+						
+  $("#FC").change(function() {
+      if ($(this).is(":checked") == true){
+          $(this).parent().parent().find('#txtCRID_popup').removeAttr('disabled');
+          $(this).parent().parent().find('#txtCRID_popup').prop('readonly','true');
+          $('#CONVFACT').prop('readonly',false);
+         
+      }
+      else
+      {
+          $(this).parent().parent().find('#txtCRID_popup').prop('disabled','true');
+          $(this).parent().parent().find('#txtCRID_popup').removeAttr('readonly');
+          $(this).parent().parent().find('#txtCRID_popup').val('');
+          $(this).parent().parent().find('#CRID_REF').val('');
+          $(this).parent().parent().find('#CONVFACT').val('');
+          $('#CONVFACT').prop('readonly',true);
+         
+      }
+	  MultiCurrency_Conversion('TOTAL_NET_AMOUNT'); 
+  });
+  
+  
+
+  function showSelectedCheck(hidden_value,selectAll){
+
+var divid ="";
+
+if(hidden_value !=""){
+
+    var all_location_id = document.querySelectorAll('input[name="'+selectAll+'[]"]');
+    
+    for(var x = 0, l = all_location_id.length; x < l;  x++){
+    
+        var checkid=all_location_id[x].id;
+        var checkval=all_location_id[x].value;
+    
+        if(hidden_value == checkval){
+        divid = checkid;
+        }
+
+        $("#"+checkid).prop('checked', false);
+        
+    }
+}
+
+if(divid !=""){
+    $("#"+divid).prop('checked', true);
+}
+}
+
+
+
 </script>
 @endpush

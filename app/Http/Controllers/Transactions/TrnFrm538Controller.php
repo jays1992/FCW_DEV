@@ -161,7 +161,9 @@ class TrnFrm538Controller extends Controller{
         $GSTdata = ['GSTID','GSTCODE','DESCRIPTIONS'];
         $objGstTypeList       = Helper::getTableData('TBL_MST_GSTTYPE',$GSTdata,NULL, NULL, NULL,'GSTCODE','ASC');
 
-        return view($this->view.'add', compact(['FormId','doc_req','docarray','objUdf','objGstTypeList','country_state_city']));       
+        $objothcurrency = $this->GetCurrencyMaster(); 
+
+        return view($this->view.'add', compact(['FormId','doc_req','docarray','objUdf','objGstTypeList','country_state_city','objothcurrency']));       
     }
 
 
@@ -251,6 +253,9 @@ class TrnFrm538Controller extends Controller{
         $IN_TIME            =   $request['IN_TIME'];
         $OUT_TIME           =   $request['OUT_TIME'];
         $TOTAL              =   $request['TOTAL'];
+        $FC = (isset($request['FC'])!="true" ? 0 : 1);
+        $CRID_REF = (isset($request['CRID_REF'])) ? $request['CRID_REF'] : 0;
+        $CONVFACT = (isset($request['CONVFACT'])) ? $request['CONVFACT'] : "";
        
         $log_data = [
             $DOC_NO,$DOC_DATE,$CUSTOMER_TYPE,$CUSTOMER_ID,$DOB,
@@ -259,10 +264,10 @@ class TrnFrm538Controller extends Controller{
             $LANDLINE_NO,$VEHICLE_REG_NO,$VEHICLE_MAKE_ID,$REG_YEAR,$SUPERVISOR_NAME,
             $IN_TIME,$OUT_TIME,$TOTAL,$CYID_REF,$BRID_REF,$FYID_REF,
             $XML_DETAILS,$XMLUDF,$VTID_REF,$USERID_REF,Date('Y-m-d'),
-            Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS,$CUSTOMER_NAME
+            Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS,$CUSTOMER_NAME,$FC,$CRID_REF,$CONVFACT
         ];
 
-        $sp_result  =   DB::select('EXEC SP_JOB_ESTIMATION_IN ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?', $log_data);  
+        $sp_result  =   DB::select('EXEC SP_JOB_ESTIMATION_IN ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?', $log_data);  
         
         $contains   =   Str::contains($sp_result[0]->RESULT, 'SUCCESS');
     
@@ -296,13 +301,15 @@ class TrnFrm538Controller extends Controller{
                                 CONCAT(T3.CTRYCODE,' - ',T3.NAME) AS COUNTRY_NAME,
                                 CONCAT(T4.STCODE,' - ',T4.NAME) AS STATE_NAME,
                                 CONCAT(T5.CITYCODE,' - ',T5.NAME) AS CITY_NAME,
-                                CONCAT(T6.VM_NO,' - ',T6.VM_NAME) AS VEHICLE_MAKE_NAME
+                                CONCAT(T6.VM_NO,' - ',T6.VM_NAME) AS VEHICLE_MAKE_NAME,
+                                T7.CRDESCRIPTION,T7.CRCODE
                                 FROM TBL_TRN_JOB_ESTIMATION_HDR T1
                                 LEFT JOIN TBL_MST_CUSTOMER T2 ON T1.CUSTOMER_ID=T2.SLID_REF
                                 LEFT JOIN TBL_MST_COUNTRY T3 ON T1.COUNTRY_ID=T3.CTRYID
                                 LEFT JOIN TBL_MST_STATE T4 ON T1.STATE_ID=T4.STID
                                 LEFT JOIN TBL_MST_CITY T5 ON T1.CITY_ID=T5.CITYID
                                 LEFT JOIN TBL_MST_VEHICLE_MASTER T6 ON T1.VEHICLE_MAKE_ID=T6.VM_ID
+                                LEFT JOIN TBL_MST_CURRENCY T7 ON T1.CRID_REF=T7.CRID
                                 WHERE T1.JEID='$id'
                                 ");
 
@@ -335,9 +342,12 @@ class TrnFrm538Controller extends Controller{
                     $objUdf[$index]->UDF_VALUE = NULL; 
                 }
             }
+
             $objtempUdf     = [];
 
-            return view($this->view.'edit',compact(['FormId','objRights','ActionStatus','HDR','DETAILS','objUdf','objGstTypeList']));      
+            $objothcurrency = $this->GetCurrencyMaster(); 
+
+            return view($this->view.'edit',compact(['FormId','objRights','ActionStatus','HDR','DETAILS','objUdf','objGstTypeList','objothcurrency']));      
         }
      
     }
@@ -363,13 +373,15 @@ class TrnFrm538Controller extends Controller{
                                 CONCAT(T3.CTRYCODE,' - ',T3.NAME) AS COUNTRY_NAME,
                                 CONCAT(T4.STCODE,' - ',T4.NAME) AS STATE_NAME,
                                 CONCAT(T5.CITYCODE,' - ',T5.NAME) AS CITY_NAME,
-                                CONCAT(T6.VM_NO,' - ',T6.VM_NAME) AS VEHICLE_MAKE_NAME
+                                CONCAT(T6.VM_NO,' - ',T6.VM_NAME) AS VEHICLE_MAKE_NAME,
+                                T7.CRDESCRIPTION,T7.CRCODE
                                 FROM TBL_TRN_JOB_ESTIMATION_HDR T1
                                 LEFT JOIN TBL_MST_CUSTOMER T2 ON T1.CUSTOMER_ID=T2.SLID_REF
                                 LEFT JOIN TBL_MST_COUNTRY T3 ON T1.COUNTRY_ID=T3.CTRYID
                                 LEFT JOIN TBL_MST_STATE T4 ON T1.STATE_ID=T4.STID
                                 LEFT JOIN TBL_MST_CITY T5 ON T1.CITY_ID=T5.CITYID
                                 LEFT JOIN TBL_MST_VEHICLE_MASTER T6 ON T1.VEHICLE_MAKE_ID=T6.VM_ID
+                                LEFT JOIN TBL_MST_CURRENCY T7 ON T1.CRID_REF=T7.CRID
                                 WHERE T1.JEID='$id'
                                 ");
 
@@ -402,8 +414,9 @@ class TrnFrm538Controller extends Controller{
                 }
             }
             $objtempUdf     = [];
+            $objothcurrency = $this->GetCurrencyMaster(); 
 
-            return view($this->view.'view',compact(['FormId','objRights','ActionStatus','HDR','DETAILS','objUdf','objGstTypeList']));      
+            return view($this->view.'view',compact(['FormId','objRights','ActionStatus','HDR','DETAILS','objUdf','objGstTypeList','objothcurrency']));      
         }
      
     }
@@ -498,6 +511,9 @@ class TrnFrm538Controller extends Controller{
         $IN_TIME            =   $request['IN_TIME'];
         $OUT_TIME           =   $request['OUT_TIME'];
         $TOTAL              =   $request['TOTAL'];
+        $FC = (isset($request['FC'])!="true" ? 0 : 1);
+        $CRID_REF = (isset($request['CRID_REF'])) ? $request['CRID_REF'] : 0;
+        $CONVFACT = (isset($request['CONVFACT'])) ? $request['CONVFACT'] : "";
        
         $log_data = [
             $DOC_ID,$DOC_NO,$DOC_DATE,$CUSTOMER_TYPE,$CUSTOMER_ID,$DOB,
@@ -506,10 +522,11 @@ class TrnFrm538Controller extends Controller{
             $LANDLINE_NO,$VEHICLE_REG_NO,$VEHICLE_MAKE_ID,$REG_YEAR,$SUPERVISOR_NAME,
             $IN_TIME,$OUT_TIME,$TOTAL,$CYID_REF,$BRID_REF,$FYID_REF,
             $XML_DETAILS,$XMLUDF,$VTID_REF,$USERID_REF,Date('Y-m-d'),
-            Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS
+            Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS,$FC,$CRID_REF,$CONVFACT
         ];
+        //dd($log_data); 
 
-        $sp_result  =   DB::select('EXEC SP_JOB_ESTIMATION_UP ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?', $log_data);
+        $sp_result  =   DB::select('EXEC SP_JOB_ESTIMATION_UP ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?', $log_data);
 
         $contains = Str::contains($sp_result[0]->RESULT, 'SUCCESS');
     
@@ -612,6 +629,9 @@ class TrnFrm538Controller extends Controller{
         $IN_TIME            =   $request['IN_TIME'];
         $OUT_TIME           =   $request['OUT_TIME'];
         $TOTAL              =   $request['TOTAL'];
+        $FC                 =   (isset($request['FC'])!="true" ? 0 : 1);
+        $CRID_REF           =   (isset($request['CRID_REF'])) ? $request['CRID_REF'] : 0;
+        $CONVFACT           =   (isset($request['CONVFACT'])) ? $request['CONVFACT'] : "";
        
         $log_data = [
             $DOC_ID,$DOC_NO,$DOC_DATE,$CUSTOMER_TYPE,$CUSTOMER_ID,$DOB,
@@ -620,10 +640,11 @@ class TrnFrm538Controller extends Controller{
             $LANDLINE_NO,$VEHICLE_REG_NO,$VEHICLE_MAKE_ID,$REG_YEAR,$SUPERVISOR_NAME,
             $IN_TIME,$OUT_TIME,$TOTAL,$CYID_REF,$BRID_REF,$FYID_REF,
             $XML_DETAILS,$XMLUDF,$VTID_REF,$USERID_REF,Date('Y-m-d'),
-            Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS
+            Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS,$FC,$CRID_REF,$CONVFACT
         ];
+  
 
-        $sp_result  =   DB::select('EXEC SP_JOB_ESTIMATION_UP ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?', $log_data);
+        $sp_result  =   DB::select('EXEC SP_JOB_ESTIMATION_UP ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?', $log_data);
 
         $contains = Str::contains($sp_result[0]->RESULT, 'SUCCESS');
     
@@ -1002,7 +1023,8 @@ class TrnFrm538Controller extends Controller{
         ");
 
        echo  $PRICE  =   isset($data[0]->PRICE) && $data[0]->PRICE !=''?$data[0]->PRICE:0;
-       die;
+       echo  $PRICE  =   1542;
+   
     }
      
 }

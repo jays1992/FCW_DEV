@@ -38,12 +38,14 @@
 
           <div class="col-lg-1 pl"><p>Existing Customer</p></div>
           <div class="col-lg-1 pl"> 
-            <input {{$ActionStatus}} type="radio" name="CUSTOMER_TYPE" value="EXIST" {{isset($HDR->CUSTOMER_TYPE) && $HDR->CUSTOMER_TYPE ==='EXIST'?'checked':''}} onchange="get_customer_type(this.value)" >
+            <input {{$ActionStatus}} type="radio" name="CUSTOMER_TYPE" value="EXIST" {{isset($HDR->CUSTOMER_TYPE) && $HDR->CUSTOMER_TYPE ==='EXIST'?'checked':''}} onchange="get_customer_type(this.value)" disabled>
+            <input {{$ActionStatus}} type="hidden" name="CUSTOMER_TYPE" value="{{isset($HDR->CUSTOMER_TYPE)?$HDR->CUSTOMER_TYPE:''}}">
           </div>
 
           <div class="col-lg-1 pl"><p>New<br/>Customer</p></div>
           <div class="col-lg-1 pl"> 
-            <input {{$ActionStatus}} type="radio" name="CUSTOMER_TYPE" value="NEW" {{isset($HDR->CUSTOMER_TYPE) && $HDR->CUSTOMER_TYPE ==='NEW'?'checked':''}} onchange="get_customer_type(this.value)" >
+            <input {{$ActionStatus}} type="radio" name="CUSTOMER_TYPE" value="NEW" {{isset($HDR->CUSTOMER_TYPE) && $HDR->CUSTOMER_TYPE ==='NEW'?'checked':''}} onchange="get_customer_type(this.value)" disabled>
+            <input {{$ActionStatus}} type="hidden" name="CUSTOMER_TYPE" value="{{isset($HDR->CUSTOMER_TYPE)?$HDR->CUSTOMER_TYPE:''}}" >
           </div>
         </div>
 
@@ -57,6 +59,29 @@
             <i class="fa fa-search" onclick="searchCustomerMaster()" style="cursor:pointer;margin-top:5px;"></i>
           </div>
         </div>
+
+
+        <div class="row">
+                            <div class="col-lg-2 pl"><p>FC</p></div>
+                            <div class="col-lg-2 pl">
+                                <input type="checkbox" {{$ActionStatus}} name="FC" id="FC" class="form-checkbox" {{isset($HDR->FC) && $HDR->FC == 1 ? 'checked' : ''}} >
+                            </div>
+                            
+                            <div class="col-lg-2 pl"><p>Currency</p></div>
+                            <div class="col-lg-2 pl" id="divcurrency" >
+
+                            
+                                <input type="text" {{$ActionStatus}} name="CRID_popup" id="txtCRID_popup" disabled class="form-control"   autocomplete="off"   value="{{ isset($HDR->CRDESCRIPTION) && $HDR->CRDESCRIPTION !=''? $HDR->CRCODE.'-'.$HDR->CRDESCRIPTION:'' }}"/>
+                           
+                                <input type="hidden"  name="CRID_REF" id="CRID_REF" class="form-control" autocomplete="off"   value="{{ isset($HDR->CRID_REF)?$HDR->CRID_REF:'' }}" />
+                                
+                            </div>
+                            
+                            <div class="col-lg-2 pl"><p>Conversion Factor</p></div>
+                            <div class="col-lg-2 pl">
+                                <input type="text" {{$ActionStatus}} name="CONVFACT" id="CONVFACT" class="form-control" onkeyup="MultiCurrency_Conversion('TOTAL')" maxlength="100" autocomplete="off" value="{{ isset($HDR->CONVFACT)?$HDR->CONVFACT:'' }}"  />
+                            </div>
+                        </div>
 
         <div class="row">
           <div class="col-lg-2 pl"><p>Customer Name*</p></div>
@@ -181,7 +206,19 @@
           <div class="col-lg-2 pl"> 
             <input type="text" name="TOTAL" id="TOTAL" class="form-control" autocomplete="off" readonly >
           </div>
+          <div id="multi_currency_section" style="display:none">
+                            <div class="col-lg-2 pl"  ><p id="currency_section"></p></div>
+                            <div class="col-lg-2 pl">
+                                <input type="text" {{$ActionStatus}} name="TotalValue_Conversion" id="TotalValue_Conversion" class="form-control"  autocomplete="off" readonly  />
+                            </div>
+                            </div>
         </div>
+
+
+
+                 
+
+
 
       </div>
 
@@ -323,6 +360,59 @@
   </div>
 </div>
 
+<!-- Currency Dropdown -->
+<div id="cridpopup" class="modal" role="dialog"  data-backdrop="static">
+<div class="modal-dialog modal-md column3_modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" id='crid_closePopup' >&times;</button>
+      </div>
+    <div class="modal-body">
+	  <div class="tablename"><p>Currency</p></div>
+	  <div class="single single-select table-responsive  table-wrapper-scroll-y my-custom-scrollbar">
+    <table id="CurrencyTable" class="display nowrap table  table-striped table-bordered" width="100%">
+    <thead>
+    <tr>
+      <th class="ROW1">Select</th> 
+      <th class="ROW2">Code</th>
+      <th class="ROW3">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="ROW1"><span class="check_th">&#10004;</span></th>
+        <td class="ROW2"><input type="text" id="currencycodesearch" class="form-control" onkeyup="CurrencyCodeFunction()"></td>
+        <td class="ROW3"><input type="text" id="currencynamesearch" class="form-control" onkeyup="CurrencyNameFunction()"></td>
+      </tr>
+    </tbody>
+    </table>
+      <table id="CurrencyTable2" class="display nowrap table  table-striped table-bordered" width="100%">
+        <thead id="thead2">
+          <!-- <tr>
+            <th>GLCode</th>
+            <th>GLName</th>
+          </tr> -->
+          
+        </thead>
+        <tbody>
+        @foreach ($objothcurrency as $crindex=>$crRow)
+        <tr>
+          <td class="ROW1"> <input type="checkbox" name="SELECT_CRID[]" id="cridcode_{{ $crindex }}" class="clscrid" value="{{ $crRow-> CRID }}" ></td>
+          <td class="ROW2">{{ $crRow-> CRCODE }}
+            <input type="hidden" id="txtcridcode_{{ $crindex }}" data-desc="{{ $crRow-> CRCODE }}" data-desc2="{{ $crRow-> CRDESCRIPTION }}"  value="{{ $crRow-> CRID }}"/>
+          </td>
+          <td class="ROW3">{{ $crRow-> CRDESCRIPTION }}</td>
+        </tr>
+        @endforeach
+        </tbody>
+      </table>
+    </div>
+		<div class="cl"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Currency Dropdown-->  
 <div id="modal" class="modal" role="dialog"  data-backdrop="static">
   <div class="modal-dialog modal-md" style="width:50%;" >
     <div class="modal-content">
@@ -440,7 +530,7 @@ function closeEvent(id){
 
 function get_customer_type(value){
   $("#SEARCH_CUSTOMER").val('');
-  $("#SEARCH_CUSTOMER").prop('readonly',false);
+  $("#SEARCH_CUSTOMER").prop('readonly',true);
   $("#CUSTOMER_NAME").prop('readonly',true);
   if(value ==='NEW'){
     $("#SEARCH_CUSTOMER").prop('readonly',true);
@@ -459,49 +549,52 @@ function get_customer_type(value){
 
 function searchCustomerMaster(){
 
-$.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+  if($('input[name="CUSTOMER_TYPE"]:checked').val() == "EXIST"){
 
-$.ajax({
-  url:'{{route("transaction",[$FormId,"searchCustomer"])}}',
-  type:'POST',
-  success:function(data) {
-    var html = '';
-
-    if(data.length > 0){
-      $.each(data, function(key, value) {
-        html +='<tr>';
-        html +='<td style="width:10%;text-align:center;" ><input type="checkbox" id="key_'+key+'" value="'+value.DATA_ID+'" onChange="bindCustomerMaster(this)" data-code="'+value.DATA_CODE+'" data-desc="'+value.DATA_DESC+'" data-f1="'+value.REGADDL1+'" data-f2="'+value.COUNTRY_ID+'" data-f3="'+value.COUNTRY_NAME+'" data-f4="'+value.STATE_ID+'" data-f5="'+value.STATE_NAME+'" data-f6="'+value.CITY_ID+'" data-f7="'+value.CITY_NAME+'" data-f8="'+value.REGPIN+'" data-f9="'+value.EMAILID+'" data-f10="'+value.PHNO+'" data-f11="'+value.MONO+'" data-f12="'+value.GSTTYPE+'" data-f13="'+value.GSTIN+'" ></td>';
-        html +='<td style="width:45%;" >'+value.DATA_CODE+' - '+value.DATA_DESC+'</td>';
-        html +='<td style="width:45%;" >'+value.MONO+'</td>';
-        html +='</tr>';
+      $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
       });
-    }
-    else{
-      html +='<tr><td colspan="3" style="text-align:center;">No data available in table</td></tr>';
-    }
 
-    $("#modal_body").html(html);
-  },
-  error: function (request, status, error) {
-    $("#YesBtn").hide();
-    $("#NoBtn").hide();
-    $("#OkBtn").show();
-    $("#AlertMessage").text(request.responseText);
-    $("#alert").modal('show');
-    $("#OkBtn").focus();
-    highlighFocusBtn('activeOk');
-    $("#material_data").html('<tr><td colspan="3" style="text-align:center;">No data available in table</td></tr>');                       
-  },
-});
+      $.ajax({
+        url:'{{route("transaction",[$FormId,"searchCustomer"])}}',
+        type:'POST',
+        success:function(data) {
+          var html = '';
 
-$("#modal_title").text('Customer Master');
-$("#modal_th1").text('Customer Code & Name');
-$("#modal_th2").text('Mobile No');
-$("#modal").show();
+          if(data.length > 0){
+            $.each(data, function(key, value) {
+              html +='<tr>';
+              html +='<td style="width:10%;text-align:center;" ><input type="checkbox" id="key_'+key+'" value="'+value.DATA_ID+'" onChange="bindCustomerMaster(this)" data-code="'+value.DATA_CODE+'" data-desc="'+value.DATA_DESC+'" data-f1="'+value.REGADDL1+'" data-f2="'+value.COUNTRY_ID+'" data-f3="'+value.COUNTRY_NAME+'" data-f4="'+value.STATE_ID+'" data-f5="'+value.STATE_NAME+'" data-f6="'+value.CITY_ID+'" data-f7="'+value.CITY_NAME+'" data-f8="'+value.REGPIN+'" data-f9="'+value.EMAILID+'" data-f10="'+value.PHNO+'" data-f11="'+value.MONO+'" data-f12="'+value.GSTTYPE+'" data-f13="'+value.GSTIN+'" ></td>';
+              html +='<td style="width:45%;" >'+value.DATA_CODE+' - '+value.DATA_DESC+'</td>';
+              html +='<td style="width:45%;" >'+value.MONO+'</td>';
+              html +='</tr>';
+            });
+          }
+          else{
+            html +='<tr><td colspan="3" style="text-align:center;">No data available in table</td></tr>';
+          }
+
+          $("#modal_body").html(html);
+        },
+        error: function (request, status, error) {
+          $("#YesBtn").hide();
+          $("#NoBtn").hide();
+          $("#OkBtn").show();
+          $("#AlertMessage").text(request.responseText);
+          $("#alert").modal('show');
+          $("#OkBtn").focus();
+          highlighFocusBtn('activeOk');
+          $("#material_data").html('<tr><td colspan="3" style="text-align:center;">No data available in table</td></tr>');                       
+        },
+      });
+
+      $("#modal_title").text('Customer Master');
+      $("#modal_th1").text('Customer Code & Name');
+      $("#modal_th2").text('Mobile No');
+      $("#modal").show();
+    }
 
 }
 
@@ -978,6 +1071,7 @@ function validateForm(action){
     var package_id = $.trim(document.getElementsByName('PACKAGE_ID[]')[i].value);
   
     if(package_id ===""){
+      flag_exist.push(package_id);
       flag_status.push('false');
       flag_focus    = document.getElementsByName('PACKAGE_NAME[]')[i].id;
       flag_message  = 'Please select package';
@@ -1354,6 +1448,7 @@ function get_total_amount(){
   }
 
   $("#TOTAL").val(parseFloat(total).toFixed(2));
+  MultiCurrency_Conversion('TOTAL'); 
 }
 
 $(function() { 
@@ -1414,5 +1509,156 @@ function get_package_amount(PACKAGE_REF){
 
   return posts;
 }
+
+
+	
+	 //Currency Dropdown
+   let crtid = "#CurrencyTable2";
+      let crtid2 = "#CurrencyTable";
+      let currencyheaders = document.querySelectorAll(crtid2 + " th");
+
+      // Sort the table element when clicking on the table headers
+      currencyheaders.forEach(function(element, i) {
+        element.addEventListener("click", function() {
+          w3.sortHTML(crtid, ".clscrid", "td:nth-child(" + (i + 1) + ")");
+        });
+      });
+
+      function CurrencyCodeFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("currencycodesearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("CurrencyTable2");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }       
+        }
+      }
+
+  function CurrencyNameFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("currencynamesearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("CurrencyTable2");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[2];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }       
+    }
+  }
+
+  $('#txtCRID_popup').click(function(event){
+    showSelectedCheck($("#CRID_REF").val(),"SELECT_CRID");
+         $("#cridpopup").show();
+      });
+
+      $("#crid_closePopup").click(function(event){
+        $("#cridpopup").hide();
+      });
+
+      $(".clscrid").click(function(){
+        var fieldid = $(this).attr('id');
+        var txtval =    $("#txt"+fieldid+"").val();
+        var texdesc =   $("#txt"+fieldid+"").data("desc")+'-'+$("#txt"+fieldid+"").data("desc2");      
+        
+        $('#txtCRID_popup').val(texdesc);    
+        $('#CRID_REF').val(txtval);
+        $("#cridpopup").hide();
+        $('#CONVFACT').val(GetConvFector(txtval));
+        $("#currencycodesearch").val(''); 
+        $("#currencynamesearch").val(''); 
+        MultiCurrency_Conversion('TOTAL'); 
+        event.preventDefault();
+      });
+
+      
+
+  //Currency Dropdown Ends	
+  
+  
+  $("#FC").change(function() {
+      if ($(this).is(":checked") == true){
+          $(this).parent().parent().find('#txtCRID_popup').removeAttr('disabled');
+          $(this).parent().parent().find('#txtCRID_popup').prop('readonly','true');
+          $('#CONVFACT').prop('readonly',false);
+         
+      }
+      else
+      {
+          $(this).parent().parent().find('#txtCRID_popup').prop('disabled','true');
+          $(this).parent().parent().find('#txtCRID_popup').removeAttr('readonly');
+          $(this).parent().parent().find('#txtCRID_popup').val('');
+          $(this).parent().parent().find('#CRID_REF').val('');
+          $(this).parent().parent().find('#CONVFACT').val('');
+          $('#CONVFACT').prop('readonly',true);
+         
+      }
+	  MultiCurrency_Conversion('TOTAL'); 
+  });
+  
+
+  $(document).ready(function(){
+
+    if ($("#FC").is(":checked") == true){
+          $('#txtCRID_popup').removeAttr('disabled');          
+          $('#CONVFACT').prop('readonly',false);
+          $('#txtCRID_popup').prop('readonly',true);
+      }
+      else
+      {
+        $('#txtCRID_popup').prop('disabled',true);
+          $('#txtCRID_popup').val('');
+          $('#CRID_REF').val('');
+          $('#CONVFACT').val('');
+          $('#CONVFACT').prop('readonly',true);
+      }
+	  MultiCurrency_Conversion('TOTAL'); 
+
+  });
+
+  function showSelectedCheck(hidden_value,selectAll){
+
+var divid ="";
+
+if(hidden_value !=""){
+
+    var all_location_id = document.querySelectorAll('input[name="'+selectAll+'[]"]');
+    
+    for(var x = 0, l = all_location_id.length; x < l;  x++){
+    
+        var checkid=all_location_id[x].id;
+        var checkval=all_location_id[x].value;
+    
+        if(hidden_value == checkval){
+        divid = checkid;
+        }
+
+        $("#"+checkid).prop('checked', false);
+        
+    }
+}
+
+if(divid !=""){
+    $("#"+divid).prop('checked', true);
+}
+}
+
+
+
 </script>
 @endpush
