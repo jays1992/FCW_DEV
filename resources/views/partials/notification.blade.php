@@ -18,7 +18,15 @@
     </div>
     <div>
       <div class="small text-gray-500">{{date('d-M-Y',strtotime($val->DOC_DATE))}}</div>
+
+      @if($val->FORM_NAME =='Birthday')
+      <span class="font-weight-bold">It's {{$val->DOC_NO}} Birthday today !!</span>
+      @elseif($val->FORM_NAME =='Marriage')
+      <span class="font-weight-bold">It's {{$val->DOC_NO}} Marriage Anniversary today !!</span>
+      @else
       <span class="font-weight-bold">A new {{$val->FORM_NAME}} document no {{$val->DOC_NO}} is ready to view!</span>
+      @endif
+
     </div>
   </a>
   @endforeach

@@ -1,57 +1,52 @@
-
 @extends('layouts.app')
 @section('content')
-
 <link href="css/sb-admin-3.min.css" rel="stylesheet">
 <style type="text/css">
-  .bgdesignsn {
-    background: url(../img/body-bg.jpg) no-repeat;}
+.bgdesignsn {
+  background: url(../img/body-bg.jpg) no-repeat;
+}
 </style>
-
 <div class="container-fluid "> 
   <div class="col-md-6">
-   <div class="row">
+    <div class="row">
       <div class="col-md-12">
-       <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom:20px">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-
-
-
-    @if(!empty($slider_data))
-          @foreach($slider_data as $key=>$row)
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom:20px">
+          <div class="carousel-inner">
+            @if(!empty($slider_data))
+            @foreach($slider_data as $key=>$row)
             <div class="item  {{ $key==0 ? 'active':''}}">
-              <img src="{{ asset('http://bsquareappfordemo.com:8888/docs/company1/BannerImage/'.$row->UPLOADBANNER) }}" alt="Express Car wash" style="width:100%;">
+              @if($row->BANNER_TYPE =='VIDEO')
+              <video class="mainslider videobgdes" autoplay muted loop="true" autoplay="true">
+                <source src="{{ asset('http://bsquareappfordemo.com:8888/docs/company1/BannerImage/'.$row->UPLOADBANNER) }}" >
+              </video>
+              @else
+                <img src="{{ asset('http://bsquareappfordemo.com:8888/docs/company1/BannerImage/'.$row->UPLOADBANNER) }}" alt="Express Car wash" style="width:100%;">
+              @endif
             </div>
-          @endforeach
-          @else
-          <div class="item active">
-          <img src="{{ asset('img/ultra-crystal.jpg') }}" alt="Express Car wash" style="width:100%;">
+            @endforeach
+            @else
+            <div class="item active">
+              <img src="{{ asset('img/ultra-crystal.jpg') }}" alt="Express Car wash" style="width:100%;">
+            </div>
+            @endif
           </div>
-        @endif
 
-
-
-
-
-
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
     </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>
   </div>
-    </div>
-    <!-- <img src="../img/ultra-crystal.jpg" class="lft_pic"> -->
-   </div>
-    </div>
-	  <div class="col-md-6">
+
+
+  
+	<div class="col-md-6">
   <div class="row">
 
   @if(isset($menu_data) && !empty($menu_data))

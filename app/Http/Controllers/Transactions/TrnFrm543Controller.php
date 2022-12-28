@@ -471,6 +471,8 @@ class TrnFrm543Controller extends Controller{
         
         $sp_listing_result = DB::select('EXEC SP_APPROVAL_LAVEL ?,?,?,?, ?', $sp_Approvallevel);
 
+        //DD($sp_listing_result);
+
         if(!empty($sp_listing_result)){
             foreach ($sp_listing_result as $key=>$valueitem){  
                 $record_status = 0;

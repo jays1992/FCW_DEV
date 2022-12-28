@@ -5962,7 +5962,7 @@ public function getItemwiseStoreDetails(Request $request){
             $CURRENT_QTY=(floatval($dRow->CURRENT_QTY)+floatval($qtyvalue));
         }
 
-        
+        //test
         
         $row = '';
         $row = $row.' <tr class="clsstrid">';
@@ -6002,13 +6002,11 @@ public function getItemwiseStoreDetails(Request $request){
 
 
 
-
 public function getaltqty(Request $request){
 
     $Status = "A";
     $itemid = $request['itemid'];
     $auomid = $request['auomid'];
-
     $ObjData =  DB::table('TBL_MST_ITEM_UOMCONV')
     ->where('TBL_MST_ITEM_UOMCONV.ITEMID_REF','=',$itemid)
     ->where('TBL_MST_ITEM_UOMCONV.TO_UOMID_REF','=',$auomid)

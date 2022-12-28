@@ -2033,6 +2033,7 @@ function bindTNCDetailsEvents(){
 
             $('#TotalValue').val(totalvalue);
             getActionEvent();
+            getActionValueEvent();
             event.preventDefault();
         }
 
@@ -4480,7 +4481,7 @@ function loadItem(taxstate,CODE,NAME,MUOM,GROUP,CTGRY,BUNIT,APART,CPART,OPART){
           $("#ItemCategorysearch").val(''); 
           $("#ItemStatussearch").val(''); 
           $('.remove').removeAttr('disabled'); 
-        
+         
           event.preventDefault();
         });
 
@@ -4488,7 +4489,8 @@ function loadItem(taxstate,CODE,NAME,MUOM,GROUP,CTGRY,BUNIT,APART,CPART,OPART){
         // return false;
         // event.preventDefault();
 
-        getActionEvent();
+       getActionEvent();
+       getActionValueEvent();
 
     }); //binditem event
 
@@ -4972,6 +4974,7 @@ function loadItem(taxstate,CODE,NAME,MUOM,GROUP,CTGRY,BUNIT,APART,CPART,OPART){
                             totalvalue = $('#TotalValue').val();
                             totalvalue =  parseFloat(totalvalue) + parseFloat(tvalue);
                             totalvalue = parseFloat(totalvalue).toFixed(2);
+
                             $('#TotalValue').val(totalvalue);
                           // $("#ITEMIDpopup").hide();
                           $('#hdn_ItemID').val('');
@@ -5006,10 +5009,14 @@ function loadItem(taxstate,CODE,NAME,MUOM,GROUP,CTGRY,BUNIT,APART,CPART,OPART){
                               $('#'+txtid).parent().parent().find('[id*="DISCOUNT_AMT"]').val(''); 
                             }
                       }
+
+                      
                       // $('.js-selectall').prop("checked", false);
                       // $("#ITEMIDpopup").hide();
                       // return false;
                       //event.preventDefault();
+
+                      
             }
             else if($(this).is(":checked") == false) 
             {
@@ -5062,6 +5069,7 @@ function loadItem(taxstate,CODE,NAME,MUOM,GROUP,CTGRY,BUNIT,APART,CPART,OPART){
         $('.remove').removeAttr('disabled'); 
 
         getActionEvent();
+        getActionValueEvent();
        
         event.preventDefault();
       });
@@ -6452,6 +6460,8 @@ $('#PaymentSlabs').on('change','[id*="PAY_DAYS"]',function( event ) {
 
 $(document).ready(function() {
 
+
+
   $("#btnSave").on("click", function( event ) {
   $("#frm_trn_po").submit();
    
@@ -7609,6 +7619,13 @@ function getActionEvent(){
   getTotalRowValue();
   taxStatusWiseTaxCalculation();
   reverse_gst();
+}
+
+function getActionValueEvent(){
+  getTotalRowValue();
+  taxStatusWiseTaxCalculation();
+  reverse_gst();
+  $("[id*='PO_QTY']").trigger('focusout'); 
 }
 
 function getTotalRowValue(){
