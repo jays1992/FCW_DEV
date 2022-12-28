@@ -115,7 +115,8 @@ class TrnFrm542Controller extends Controller{
 
         $docarray   =   $this->getManualAutoDocNo(date('Y-m-d'),$doc_req); 
         $objUdf     =   $this->getUdf(['VTID_REF'=>$this->vtid_ref]);
-        return view($this->view.'add', compact(['FormId','doc_req','docarray','objUdf']));       
+        $objothcurrency = $this->GetCurrencyMaster(); 
+        return view($this->view.'add', compact(['FormId','doc_req','docarray','objUdf','objothcurrency']));       
     }
 
 
@@ -244,6 +245,9 @@ class TrnFrm542Controller extends Controller{
         $TOTAL_TAX_AMOUNT       =   $request['TOTAL_TAX_AMOUNT'] !=''?$request['TOTAL_TAX_AMOUNT']:0;
         $TOTAL_NET_AMOUNT       =   $request['TOTAL_NET_AMOUNT'] !=''?$request['TOTAL_NET_AMOUNT']:0;
         $TOTAL_PAID_AMOUNT      =   $request['TOTAL_PAID_AMOUNT'] !=''?$request['TOTAL_PAID_AMOUNT']:0;
+        $FC = (isset($request['FC'])!="true" ? 0 : 1);
+        $CRID_REF = (isset($request['CRID_REF'])) ? $request['CRID_REF'] : 0;
+        $CONVFACT = (isset($request['CONVFACT'])) ? $request['CONVFACT'] : "";
        
         $log_data = [
             $DOC_NO,$DOC_DATE,$JOB_NO,$JEID_REF,$JOB_DATE,
@@ -251,10 +255,10 @@ class TrnFrm542Controller extends Controller{
             $LANDLINE_NO,$TOTAL_PACKAGE_AMOUNT,$TOTAL_DISCOUONT_AMOUNT,$TOTAL_TAX_AMOUNT,$TOTAL_NET_AMOUNT,
             $TOTAL_PAID_AMOUNT,$XML_PKG,$XML_DIS,$XML_TAX,$XML_PAY,
             $XML_UDF,$CYID_REF,$BRID_REF,$FYID_REF,$VTID_REF,
-            $USERID_REF,Date('Y-m-d'),Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS
+            $USERID_REF,Date('Y-m-d'),Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS,$FC,$CRID_REF,$CONVFACT
         ];
 
-        $sp_result  =   DB::select('EXEC SP_SERVICE_INVOICE_IN ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?', $log_data);  
+        $sp_result  =   DB::select('EXEC SP_SERVICE_INVOICE_IN ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?,?,?', $log_data);  
         
         $contains   =   Str::contains($sp_result[0]->RESULT, 'SUCCESS');
     
@@ -282,11 +286,13 @@ class TrnFrm542Controller extends Controller{
             $GSTdata = ['GSTID','GSTCODE','DESCRIPTIONS'];
             $objGstTypeList       = Helper::getTableData('TBL_MST_GSTTYPE',$GSTdata,NULL, NULL, NULL,'GSTCODE','ASC');
 
-            $HDR            =   DB::select("SELECT 
+            $HDR            =   DB::select("	SELECT 
                                 T1.*,
-                                CONCAT(T2.CCODE,' - ',T2.NAME) AS CUSTOMER_NAME
+                                CONCAT(T2.CCODE,' - ',T2.NAME) AS CUSTOMER_NAME,
+                                T3.CRDESCRIPTION,T3.CRCODE
                                 FROM TBL_TRN_SERVICE_INVOICE_HDR T1
                                 LEFT JOIN TBL_MST_CUSTOMER T2 ON T1.CUSTOMER_ID=T2.SLID_REF
+                                LEFT JOIN TBL_MST_CURRENCY T3 ON T1.CRID_REF=T3.CRID
                                 WHERE T1.SIID='$id'
                                 ");
                   
@@ -315,8 +321,9 @@ class TrnFrm542Controller extends Controller{
                 }
             }
             $objtempUdf     = [];
+            $objothcurrency = $this->GetCurrencyMaster(); 
 
-            return view($this->view.'edit',compact(['FormId','objRights','ActionStatus','HDR','PKG','DIS','TAX','PAY','objUdf','objGstTypeList']));      
+            return view($this->view.'edit',compact(['FormId','objRights','ActionStatus','HDR','PKG','DIS','TAX','PAY','objUdf','objGstTypeList','objothcurrency']));      
         }
      
     }
@@ -336,11 +343,13 @@ class TrnFrm542Controller extends Controller{
             $GSTdata = ['GSTID','GSTCODE','DESCRIPTIONS'];
             $objGstTypeList       = Helper::getTableData('TBL_MST_GSTTYPE',$GSTdata,NULL, NULL, NULL,'GSTCODE','ASC');
 
-            $HDR            =   DB::select("SELECT 
+            $HDR            =   DB::select("	SELECT 
                                 T1.*,
-                                CONCAT(T2.CCODE,' - ',T2.NAME) AS CUSTOMER_NAME
+                                CONCAT(T2.CCODE,' - ',T2.NAME) AS CUSTOMER_NAME,
+                                T3.CRDESCRIPTION,T3.CRCODE
                                 FROM TBL_TRN_SERVICE_INVOICE_HDR T1
                                 LEFT JOIN TBL_MST_CUSTOMER T2 ON T1.CUSTOMER_ID=T2.SLID_REF
+                                LEFT JOIN TBL_MST_CURRENCY T3 ON T1.CRID_REF=T3.CRID
                                 WHERE T1.SIID='$id'
                                 ");
                   
@@ -369,8 +378,9 @@ class TrnFrm542Controller extends Controller{
                 }
             }
             $objtempUdf     = [];
+            $objothcurrency = $this->GetCurrencyMaster(); 
 
-            return view($this->view.'view',compact(['FormId','objRights','ActionStatus','HDR','PKG','DIS','TAX','PAY','objUdf','objGstTypeList']));      
+            return view($this->view.'view',compact(['FormId','objRights','ActionStatus','HDR','PKG','DIS','TAX','PAY','objUdf','objGstTypeList','objothcurrency']));      
         }
      
     }
@@ -500,6 +510,9 @@ class TrnFrm542Controller extends Controller{
         $TOTAL_TAX_AMOUNT       =   $request['TOTAL_TAX_AMOUNT'] !=''?$request['TOTAL_TAX_AMOUNT']:0;
         $TOTAL_NET_AMOUNT       =   $request['TOTAL_NET_AMOUNT'] !=''?$request['TOTAL_NET_AMOUNT']:0;
         $TOTAL_PAID_AMOUNT      =   $request['TOTAL_PAID_AMOUNT'] !=''?$request['TOTAL_PAID_AMOUNT']:0;
+        $FC = (isset($request['FC'])!="true" ? 0 : 1);
+        $CRID_REF = (isset($request['CRID_REF'])) ? $request['CRID_REF'] : 0;
+        $CONVFACT = (isset($request['CONVFACT'])) ? $request['CONVFACT'] : "";
 
         $log_data = [
             $DOC_ID,$DOC_NO,$DOC_DATE,$JOB_NO,$JEID_REF,$JOB_DATE,
@@ -507,10 +520,10 @@ class TrnFrm542Controller extends Controller{
             $LANDLINE_NO,$TOTAL_PACKAGE_AMOUNT,$TOTAL_DISCOUONT_AMOUNT,$TOTAL_TAX_AMOUNT,$TOTAL_NET_AMOUNT,
             $TOTAL_PAID_AMOUNT,$XML_PKG,$XML_DIS,$XML_TAX,$XML_PAY,
             $XML_UDF,$CYID_REF,$BRID_REF,$FYID_REF,$VTID_REF,
-            $USERID_REF,Date('Y-m-d'),Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS
+            $USERID_REF,Date('Y-m-d'),Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS,$FC,$CRID_REF,$CONVFACT
         ];
        
-        $sp_result  =   DB::select('EXEC SP_SERVICE_INVOICE_UP ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?', $log_data); 
+        $sp_result  =   DB::select('EXEC SP_SERVICE_INVOICE_UP ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?', $log_data); 
 
         $contains = Str::contains($sp_result[0]->RESULT, 'SUCCESS');
     
@@ -667,6 +680,9 @@ class TrnFrm542Controller extends Controller{
         $TOTAL_TAX_AMOUNT       =   $request['TOTAL_TAX_AMOUNT'] !=''?$request['TOTAL_TAX_AMOUNT']:0;
         $TOTAL_NET_AMOUNT       =   $request['TOTAL_NET_AMOUNT'] !=''?$request['TOTAL_NET_AMOUNT']:0;
         $TOTAL_PAID_AMOUNT      =   $request['TOTAL_PAID_AMOUNT'] !=''?$request['TOTAL_PAID_AMOUNT']:0;
+        $FC = (isset($request['FC'])!="true" ? 0 : 1);
+        $CRID_REF = (isset($request['CRID_REF'])) ? $request['CRID_REF'] : 0;
+        $CONVFACT = (isset($request['CONVFACT'])) ? $request['CONVFACT'] : "";
 
         $log_data = [
             $DOC_ID,$DOC_NO,$DOC_DATE,$JOB_NO,$JEID_REF,$JOB_DATE,
@@ -674,10 +690,10 @@ class TrnFrm542Controller extends Controller{
             $LANDLINE_NO,$TOTAL_PACKAGE_AMOUNT,$TOTAL_DISCOUONT_AMOUNT,$TOTAL_TAX_AMOUNT,$TOTAL_NET_AMOUNT,
             $TOTAL_PAID_AMOUNT,$XML_PKG,$XML_DIS,$XML_TAX,$XML_PAY,
             $XML_UDF,$CYID_REF,$BRID_REF,$FYID_REF,$VTID_REF,
-            $USERID_REF,Date('Y-m-d'),Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS
+            $USERID_REF,Date('Y-m-d'),Date('h:i:s.u'),$ACTIONNAME,$IPADDRESS,$FC,$CRID_REF,$CONVFACT
         ];
        
-        $sp_result  =   DB::select('EXEC SP_SERVICE_INVOICE_UP ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?', $log_data); 
+        $sp_result  =   DB::select('EXEC SP_SERVICE_INVOICE_UP ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?', $log_data); 
 
         $contains = Str::contains($sp_result[0]->RESULT, 'SUCCESS');
     
