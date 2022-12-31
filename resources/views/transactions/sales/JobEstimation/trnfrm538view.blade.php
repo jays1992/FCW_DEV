@@ -92,7 +92,7 @@
 
           <div class="col-lg-2 pl"><p>Date of Birth</p></div>
           <div class="col-lg-2 pl"> 
-            <input {{$ActionStatus}} type="date" name="DOB" id="DOB" value="{{isset($HDR->DOB)?$HDR->DOB:''}}" class="form-control" autocomplete="off" >
+            <input {{$ActionStatus}} type="date" name="DOB" id="DOB" value="{{isset($HDR->DOB)?$HDR->DOB:''}}" max="{{date('Y-m-d')}}" class="form-control" autocomplete="off" >
           </div>
 
           <div class="col-lg-2 pl"><p>E-Mail Id*</p></div>
@@ -680,8 +680,8 @@ function getCountryMaster(){
   });
 
   $("#modal_title").text('Country Master');
-  $("#modal_th1").text('Code');
-  $("#modal_th2").text('Desc');
+  $("#modal_th1").text('Country Code');
+  $("#modal_th2").text('Country Name');
   $("#modal").show();
 }
 
@@ -755,8 +755,8 @@ function getStateMaster(){
     });
 
     $("#modal_title").text('State Master');
-    $("#modal_th1").text('Code');
-    $("#modal_th2").text('Desc');
+    $("#modal_th1").text('State Code');
+    $("#modal_th2").text('State Name');
     $("#modal").show();
 
   }
@@ -843,8 +843,8 @@ function getCityMaster(){
     });
 
     $("#modal_title").text('City Master');
-    $("#modal_th1").text('Code');
-    $("#modal_th2").text('Desc');
+    $("#modal_th1").text('City Code');
+    $("#modal_th2").text('City Name');
     $("#modal").show();
 
   }
@@ -904,8 +904,8 @@ function getVehicleMakeMaster(){
   });
 
   $("#modal_title").text('Vehicle Make Master');
-  $("#modal_th1").text('Code');
-  $("#modal_th2").text('Desc');
+  $("#modal_th1").text('Vehicle Code');
+  $("#modal_th2").text('Vehicle Name');
   $("#modal").show();
 }
 
@@ -1123,12 +1123,32 @@ function validateForm(action){
     $("#OkBtn1").focus();
     return false;
   }
+  else if($.trim($("#DOB").val()) !="" && $.trim($("#ANNIVERSARY_DATE").val()) !="" && $.trim($("#DOB").val()) >= $.trim($("#ANNIVERSARY_DATE").val())){
+    $("#FocusId").val('ANNIVERSARY_DATE');        
+    $("#YesBtn").hide();
+    $("#NoBtn").hide();
+    $("#OkBtn1").show();
+    $("#AlertMessage").text('Anniversary Date should be greater than Date of Birth.');
+    $("#alert").modal('show');
+    $("#OkBtn1").focus();
+    return false;
+  }
   else if($.trim($("#EMAIL_ID").val()) ===""){
     $("#FocusId").val('EMAIL_ID');        
     $("#YesBtn").hide();
     $("#NoBtn").hide();
     $("#OkBtn1").show();
     $("#AlertMessage").text('Please Enter E-Mail Id.');
+    $("#alert").modal('show');
+    $("#OkBtn1").focus();
+    return false;
+  }
+  else if(IsEmail($.trim($("#EMAIL_ID").val()))==false){
+    $("#FocusId").val('EMAIL_ID');        
+    $("#YesBtn").hide();
+    $("#NoBtn").hide();
+    $("#OkBtn1").show();
+    $("#AlertMessage").text('Please Enter Correct E-Mail Id.');
     $("#alert").modal('show');
     $("#OkBtn1").focus();
     return false;
@@ -1657,8 +1677,6 @@ if(divid !=""){
     $("#"+divid).prop('checked', true);
 }
 }
-
-
 
 </script>
 @endpush

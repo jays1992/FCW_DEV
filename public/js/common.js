@@ -251,3 +251,12 @@ function read_notification(TABLE_NAME,COLUMN_NAME,DOC_ID,KEY){
   $("#total_notify_count").text(result+'+');
 
 }
+
+function IsEmail(email) {
+  var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if(!regex.test(email)) {
+    return false;
+  }else{
+    return true;
+  }
+}
