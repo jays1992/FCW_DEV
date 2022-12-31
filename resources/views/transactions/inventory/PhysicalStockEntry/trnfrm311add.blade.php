@@ -105,13 +105,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="participantRow1">
-                                        
-                                            <td hidden>
-                                                
+                                        <tr class="participantRow1">                                        
+                                            <td hidden>                                                
                                                 <input type="text" name="rowscount1[]" />
-                                            </td>
-                                
+                                            </td>                                
                                             <td><input type="text" name="MainItemCode1_0" id="MainItemCode1_0"  class="form-control" autocomplete="off" readonly /></td>
                                             <td hidden><input type="hidden" name="MainItemId1_Ref_0" id="MainItemId1_Ref_0" class="form-control" autocomplete="off" /></td>
                                             <td><input type="text" name="MainItemName1_0" id="MainItemName1_0" class="form-control" autocomplete="off" readonly /></td> 
@@ -133,10 +130,8 @@
                                                 <button class="btn add" title="add" data-toggle="tooltip" type="button"><i class="fa fa-plus"></i></button>
                                                 <button class="btn remove smaterial" title="Delete" data-toggle="tooltip" type="button"><i class="fa fa-trash"></i></button>
                                             </td>
-                                        </tr>
-                                        
-                                    </tbody>
-                             
+                                        </tr>                                        
+                                    </tbody>                             
                                 </table>
                 
                                 
